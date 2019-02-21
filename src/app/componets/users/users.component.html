@@ -1,0 +1,41 @@
+<div class="container">
+<table class="table" *ngIf="user!=undefined">
+  <th>ID</th>
+  <th>FirstName</th>
+  <th>LastName</th>
+  <th>PhoneNumber</th>
+  <th>Email</th>
+  <th>Tools</th>
+  <tr *ngFor="let u of user.data;let i = index;">
+      <td *ngIf="!isEdit[i]; else eId">{{ u._id }}</td>
+      <td *ngIf="!isEdit[i]">{{ u.firstname }}</td>
+      <td *ngIf="!isEdit[i]">{{ u.lastname }}</td>
+      <td *ngIf="!isEdit[i]">{{ u.phonenumber }}</td>
+      <td *ngIf="!isEdit[i]">{{ u.email }}</td>
+      <td *ngIf="!isEdit[i]"><button (click)="toggleEdit(i)">Edit</button><button (click)="deleteUser(u._id)">Delete</button></td>
+      <ng-template #eId>
+        <td>{{ u._id }}</td>
+        <td><input [(ngModel)]="firstName" placeholder="Enter firstName"></td>
+        <td><input [(ngModel)]="lastName" placeholder="Enter lastName"></td>
+        <td><input [(ngModel)]="phoneNumber" placeholder="Enter phoneNumber"></td>
+        <td><input [(ngModel)]="email" placeholder="Enter email"></td>
+        <td><button (click)="editUser(u._id, i)">Submit</button></td>
+      </ng-template>
+    </tr>
+  <tr *ngIf="isCreate">
+      <td>Auto generate</td>
+      <td><input [(ngModel)]="firstName" placeholder="Enter firstName"></td>
+      <td><input [(ngModel)]="lastName" placeholder="Enter lastName"></td>
+      <td><input [(ngModel)]="phoneNumber" placeholder="Enter phoneNumber"></td>
+      <td><input [(ngModel)]="email" placeholder="Enter email"></td>
+      <td><button (click)="createUser()">Create</button></td>
+  </tr>
+  <tr>
+    <td><button (click)="toggleCreate()">+</button></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
